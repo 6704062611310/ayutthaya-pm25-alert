@@ -18,24 +18,40 @@ const LIFF_ID = "2011539012-oyei56Eu";
 // =====================================
 
 const districts = [
+
   ["พระนครศรีอยุธยา", 14.3532, 100.5684],
+
   ["เสนา", 14.3270, 100.3950],
+
   ["บางปะอิน", 14.2400, 100.5780],
+
   ["บางไทร", 14.2140, 100.4760],
+
   ["บางซ้าย", 14.3320, 100.3060],
+
   ["ลาดบัวหลวง", 14.1720, 100.3180],
+
   ["ผักไห่", 14.4590, 100.3690],
+
   ["นครหลวง", 14.4610, 100.6090],
+
   ["ท่าเรือ", 14.5660, 100.7240],
+
   ["ภาชี", 14.4490, 100.6540],
+
   ["อุทัย", 14.3630, 100.6710],
+
   ["วังน้อย", 14.2260, 100.7150],
+
   ["มหาราช", 14.5390, 100.5310],
+
   ["บ้านแพรก", 14.6660, 100.5840]
+
 ];
 
+
 // =====================================
-// DOM
+// Elements
 // =====================================
 
 const districtEl =
@@ -62,24 +78,30 @@ const followStatusEl =
 const subscriptionListEl =
   document.querySelector("#subscriptionList");
 
+
 // =====================================
-// LINE User ID ปัจจุบัน
+// ตัวแปรระบบ
 // =====================================
 
 let currentLineUserId = null;
+
 let supabaseClient = null;
+
 
 // =====================================
 // สร้าง Supabase Client
 // =====================================
 
 function getSupabase() {
+
   if (!supabaseClient) {
 
     if (!window.supabase) {
+
       throw new Error(
         "ไม่พบ Supabase JavaScript library"
       );
+
     }
 
     supabaseClient =
@@ -87,10 +109,12 @@ function getSupabase() {
         SUPABASE_URL,
         SUPABASE_PUBLISHABLE_KEY
       );
+
   }
 
   return supabaseClient;
 }
+
 
 // =====================================
 // สร้างรายการอำเภอ
@@ -102,20 +126,26 @@ districts.forEach(([name]) => {
     document.createElement("option");
 
   option.value = name;
+
   option.textContent = name;
 
   districtEl.appendChild(option);
+
 });
+
 
 // =====================================
 // หาอำเภอที่เลือก
 // =====================================
 
 function selectedDistrict() {
+
   return districts.find(
     d => d[0] === districtEl.value
   );
+
 }
+
 
 // =====================================
 // แบ่งระดับ PM2.5
@@ -124,35 +154,46 @@ function selectedDistrict() {
 function classify(pm) {
 
   if (pm <= 15) {
+
     return [
       "ปกติ",
       "ปกติ",
       "สามารถทำกิจกรรมกลางแจ้งได้ตามปกติ"
     ];
+
   }
 
+
   if (pm <= 37.5) {
+
     return [
       "เริ่มมีผลกระทบ",
       "เริ่มมีผลกระทบ",
       "ลดกิจกรรมกลางแจ้งที่ใช้แรงมากและติดตามค่า PM2.5"
     ];
+
   }
 
+
   if (pm <= 75) {
+
     return [
       "มีผลกระทบต่อสุขภาพ",
       "มีผลกระทบต่อสุขภาพ",
       "ลดกิจกรรมกลางแจ้งและสวมหน้ากากที่เหมาะสมเมื่อจำเป็น"
     ];
+
   }
+
 
   return [
     "ควรเฝ้าระวัง",
     "ควรเฝ้าระวัง",
     "หลีกเลี่ยงกิจกรรมกลางแจ้งและติดตามสถานการณ์อย่างใกล้ชิด"
   ];
+
 }
+
 
 // =====================================
 // แสดง Error
@@ -161,8 +202,11 @@ function classify(pm) {
 function showError(message) {
 
   errorEl.textContent = message;
+
   errorEl.classList.remove("hidden");
+
 }
+
 
 // =====================================
 // ล้าง Error
@@ -171,11 +215,14 @@ function showError(message) {
 function clearError() {
 
   errorEl.classList.add("hidden");
+
   errorEl.textContent = "";
+
 }
 
+
 // =====================================
-// ตั้งค่า LINE User ID ในหน้าเว็บ
+// ตั้งค่า LINE User ID
 // =====================================
 
 function setLineUserId(userId) {
@@ -183,11 +230,15 @@ function setLineUserId(userId) {
   currentLineUserId = userId;
 
   if (lineUserIdEl) {
+
     lineUserIdEl.value = userId;
 
     lineUserIdEl.readOnly = true;
+
   }
+
 }
+
 
 // =====================================
 // LINE Login / LIFF
@@ -197,13 +248,20 @@ async function initLINE() {
 
   clearError();
 
-  if (!LIFF_ID) {
+
+  if (
+    !LIFF_ID ||
+    LIFF_ID === "ใส่-LIFF-ID-ตรงนี้"
+  ) {
+
     showError(
       "ยังไม่ได้ตั้งค่า LIFF ID"
     );
 
     return false;
+
   }
+
 
   if (!window.liff) {
 
@@ -212,7 +270,9 @@ async function initLINE() {
     );
 
     return false;
+
   }
+
 
   try {
 
@@ -220,22 +280,36 @@ async function initLINE() {
       liffId: LIFF_ID
     });
 
+
     // ถ้ายังไม่ได้ Login
     if (!liff.isLoggedIn()) {
+
       return false;
+
     }
+
 
     // ขอข้อมูล Profile
     const profile =
       await liff.getProfile();
 
-    if (!profile || !profile.userId) {
+
+    if (
+      !profile ||
+      !profile.userId
+    ) {
+
       throw new Error(
         "ไม่สามารถอ่าน LINE User ID ได้"
       );
+
     }
 
-    setLineUserId(profile.userId);
+
+    setLineUserId(
+      profile.userId
+    );
+
 
     // โหลดรายการอำเภอที่ติดตาม
     const supabase =
@@ -245,6 +319,7 @@ async function initLINE() {
       supabase,
       profile.userId
     );
+
 
     return true;
 
@@ -257,12 +332,16 @@ async function initLINE() {
 
     showError(
       "ไม่สามารถเชื่อมต่อ LINE ได้: " +
-      (err.message || "เกิดข้อผิดพลาด")
+      (err.message ||
+        "เกิดข้อผิดพลาด")
     );
 
     return false;
+
   }
+
 }
+
 
 // =====================================
 // Login LINE
@@ -272,14 +351,20 @@ async function loginLINE() {
 
   clearError();
 
-  if (!LIFF_ID) {
+
+  if (
+    !LIFF_ID ||
+    LIFF_ID === "ใส่-LIFF-ID-ตรงนี้"
+  ) {
 
     showError(
       "ยังไม่ได้ตั้งค่า LIFF ID"
     );
 
     return false;
+
   }
+
 
   if (!window.liff) {
 
@@ -288,7 +373,9 @@ async function loginLINE() {
     );
 
     return false;
+
   }
+
 
   try {
 
@@ -296,24 +383,36 @@ async function loginLINE() {
       liffId: LIFF_ID
     });
 
+
     if (!liff.isLoggedIn()) {
 
       liff.login();
 
       return false;
+
     }
+
 
     const profile =
       await liff.getProfile();
 
-    if (!profile || !profile.userId) {
+
+    if (
+      !profile ||
+      !profile.userId
+    ) {
 
       throw new Error(
         "ไม่สามารถอ่าน LINE User ID ได้"
       );
+
     }
 
-    setLineUserId(profile.userId);
+
+    setLineUserId(
+      profile.userId
+    );
+
 
     return true;
 
@@ -326,12 +425,16 @@ async function loginLINE() {
 
     showError(
       "เข้าสู่ระบบ LINE ไม่สำเร็จ: " +
-      (err.message || "เกิดข้อผิดพลาด")
+      (err.message ||
+        "เกิดข้อผิดพลาด")
     );
 
     return false;
+
   }
+
 }
+
 
 // =====================================
 // ตรวจสอบ PM2.5
@@ -341,8 +444,10 @@ async function getPM25() {
 
   clearError();
 
+
   const districtData =
     selectedDistrict();
+
 
   if (!districtData) {
 
@@ -351,80 +456,108 @@ async function getPM25() {
     );
 
     return;
+
   }
+
 
   const [name, lat, lon] =
     districtData;
+
 
   checkBtn.disabled = true;
 
   checkBtn.textContent =
     "กำลังโหลด...";
 
+
   try {
 
     const params =
       new URLSearchParams({
+
         lat: String(lat),
+
         lon: String(lon),
+
         district: name
+
       });
+
 
     const url =
       `${PM25_FUNCTION}?${params.toString()}`;
+
 
     console.log(
       "PM2.5 Request:",
       url
     );
 
+
     const response =
       await fetch(url);
 
+
     const data =
       await response.json();
+
 
     console.log(
       "PM2.5 Response:",
       data
     );
 
-    if (!response.ok || !data.ok) {
+
+    if (
+      !response.ok ||
+      !data.ok
+    ) {
 
       throw new Error(
         data.error ||
         "ไม่สามารถอ่านข้อมูล PM2.5 ได้"
       );
+
     }
+
 
     const pm =
       Number(data.pm25);
+
 
     if (!Number.isFinite(pm)) {
 
       throw new Error(
         "ข้อมูล PM2.5 ไม่ถูกต้อง"
       );
+
     }
+
 
     const [, risk, advice] =
       classify(pm);
+
 
     document.querySelector(
       "#districtName"
     ).textContent = name;
 
+
     document.querySelector(
       "#pm25"
-    ).textContent = pm.toFixed(1);
+    ).textContent =
+      pm.toFixed(1);
+
 
     document.querySelector(
       "#risk"
     ).textContent = risk;
 
+
     document.querySelector(
       "#advice"
     ).textContent = advice;
+
 
     document.querySelector(
       "#levelPill"
@@ -432,6 +565,7 @@ async function getPM25() {
       data.aqi
         ? `AQI ${data.aqi}`
         : risk;
+
 
     document.querySelector(
       "#source"
@@ -446,9 +580,11 @@ async function getPM25() {
         "-"
       }`;
 
+
     resultEl.classList.remove(
       "hidden"
     );
+
 
   } catch (err) {
 
@@ -457,14 +593,17 @@ async function getPM25() {
       err
     );
 
+
     showError(
       err.message ||
       "เกิดข้อผิดพลาดในการอ่านข้อมูล PM2.5"
     );
 
+
     resultEl.classList.add(
       "hidden"
     );
+
 
   } finally {
 
@@ -472,8 +611,11 @@ async function getPM25() {
 
     checkBtn.textContent =
       "ตรวจสอบ PM2.5";
+
   }
+
 }
+
 
 // =====================================
 // บันทึกการติดตามอำเภอ
@@ -483,12 +625,15 @@ async function saveSubscription() {
 
   clearError();
 
+
   followStatusEl.classList.add(
     "hidden"
   );
 
+
   const district =
     districtEl.value;
+
 
   if (!district) {
 
@@ -497,7 +642,9 @@ async function saveSubscription() {
     );
 
     return;
+
   }
+
 
   // ถ้ายังไม่มี User ID ให้ Login LINE
   if (!currentLineUserId) {
@@ -505,23 +652,31 @@ async function saveSubscription() {
     const loggedIn =
       await loginLINE();
 
+
     if (!loggedIn) {
+
       return;
+
     }
+
   }
+
 
   const lineUserId =
     currentLineUserId;
+
 
   followBtn.disabled = true;
 
   followBtn.textContent =
     "กำลังบันทึก...";
 
+
   try {
 
     const supabase =
       getSupabase();
+
 
     const { error } =
       await supabase
@@ -543,21 +698,28 @@ async function saveSubscription() {
           }
         );
 
+
     if (error) {
+
       throw error;
+
     }
+
 
     followStatusEl.textContent =
       `กำลังติดตามอำเภอ ${district} เรียบร้อยแล้ว`;
+
 
     followStatusEl.classList.remove(
       "hidden"
     );
 
+
     await loadSubscriptions(
       supabase,
       lineUserId
     );
+
 
   } catch (err) {
 
@@ -566,6 +728,7 @@ async function saveSubscription() {
       err
     );
 
+
     showError(
       `บันทึกไม่สำเร็จ: ${
         err.message ||
@@ -573,14 +736,18 @@ async function saveSubscription() {
       }`
     );
 
+
   } finally {
 
     followBtn.disabled = false;
 
     followBtn.textContent =
       "ติดตามอำเภอนี้";
+
   }
+
 }
+
 
 // =====================================
 // โหลดรายการอำเภอที่ติดตาม
@@ -597,25 +764,33 @@ async function loadSubscriptions(
       "ยังไม่ได้เชื่อมต่อ LINE";
 
     return;
+
   }
+
 
   const {
     data,
     error
   } = await supabase
+
     .from("subscriptions")
+
     .select(
       "district, enabled"
     )
+
     .eq(
       "line_user_id",
       lineUserId
     )
+
     .eq(
       "enabled",
       true
     )
+
     .order("district");
+
 
   if (error) {
 
@@ -624,32 +799,47 @@ async function loadSubscriptions(
       error
     );
 
+
     subscriptionListEl.textContent =
       "ไม่สามารถโหลดรายการติดตามได้";
 
     return;
+
   }
 
-  if (!data || !data.length) {
+
+  if (
+    !data ||
+    !data.length
+  ) {
 
     subscriptionListEl.textContent =
       "ยังไม่ได้ติดตามอำเภอใด";
 
     return;
+
   }
+
 
   subscriptionListEl.innerHTML =
     data
       .map(
         row => `
           <div class="sub-item">
-            <span>📍 ${row.district}</span>
-            <strong>กำลังติดตาม</strong>
+            <span>
+              📍 ${row.district}
+            </span>
+
+            <strong>
+              กำลังติดตาม
+            </strong>
           </div>
         `
       )
       .join("");
+
 }
+
 
 // =====================================
 // Event Listeners
@@ -660,10 +850,12 @@ checkBtn.addEventListener(
   getPM25
 );
 
+
 followBtn.addEventListener(
   "click",
   saveSubscription
 );
+
 
 // =====================================
 // เริ่มต้นระบบ
@@ -683,6 +875,8 @@ document.addEventListener(
         "Startup error:",
         err
       );
+
     }
+
   }
 );

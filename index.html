@@ -21,23 +21,27 @@
 
   <main class="container">
 
-    <!-- Header -->
     <section class="hero">
-      <div class="badge">PM2.5 • พระนครศรีอยุธยา</div>
+      <div class="badge">
+        PM2.5 • พระนครศรีอยุธยา
+      </div>
 
-      <h1>ระบบแจ้งเตือนค่าฝุ่น PM2.5 รายอำเภอ</h1>
+      <h1>
+        ระบบแจ้งเตือนค่าฝุ่น PM2.5 รายอำเภอ
+      </h1>
 
       <p>
-        เลือกอำเภอเพื่อตรวจสอบค่าฝุ่นล่าสุด ระดับความเสี่ยง
-        และสมัครติดตามการแจ้งเตือนผ่าน LINE
+        เลือกอำเภอเพื่อตรวจสอบค่าฝุ่นล่าสุด
+        ระดับความเสี่ยง และสมัครติดตามการแจ้งเตือนผ่าน LINE
       </p>
     </section>
 
 
-    <!-- ตรวจสอบ PM2.5 -->
     <section class="card">
 
-      <label for="district">เลือกอำเภอ</label>
+      <label for="district">
+        เลือกอำเภอ
+      </label>
 
       <select id="district"></select>
 
@@ -51,8 +55,13 @@
         <div class="result-head">
 
           <div>
-            <div class="muted">อำเภอ</div>
-            <h2 id="districtName">-</h2>
+            <div class="muted">
+              อำเภอ
+            </div>
+
+            <h2 id="districtName">
+              -
+            </h2>
           </div>
 
           <div id="levelPill" class="pill">
@@ -63,21 +72,43 @@
 
 
         <div class="pm-value">
-          <span id="pm25">--</span>
-          <small>µg/m³</small>
+
+          <span id="pm25">
+            --
+          </span>
+
+          <small>
+            µg/m³
+          </small>
+
         </div>
 
 
         <div class="grid">
 
           <div class="mini-card">
-            <span>ระดับความเสี่ยง</span>
-            <strong id="risk">-</strong>
+
+            <span>
+              ระดับความเสี่ยง
+            </span>
+
+            <strong id="risk">
+              -
+            </strong>
+
           </div>
 
+
           <div class="mini-card">
-            <span>คำแนะนำ</span>
-            <strong id="advice">-</strong>
+
+            <span>
+              คำแนะนำ
+            </span>
+
+            <strong id="advice">
+              -
+            </strong>
+
           </div>
 
         </div>
@@ -95,14 +126,14 @@
     </section>
 
 
-    <!-- ติดตามอำเภอ -->
     <section class="card">
 
-      <h2>ติดตามอำเภอนี้</h2>
+      <h2>
+        ติดตามอำเภอนี้
+      </h2>
 
       <p class="muted">
-        กรอก LINE User ID เพื่อให้ระบบสามารถส่งแจ้งเตือน
-        เมื่อค่าฝุ่นถึงเกณฑ์
+        กรอก LINE User ID เพื่อให้ระบบสามารถส่งแจ้งเตือนเมื่อค่าฝุ่นถึงเกณฑ์
       </p>
 
 
@@ -127,10 +158,11 @@
     </section>
 
 
-    <!-- สถานะการติดตาม -->
     <section class="card">
 
-      <h2>สถานะการติดตาม</h2>
+      <h2>
+        สถานะการติดตาม
+      </h2>
 
       <div id="subscriptionList" class="empty">
         ยังไม่ได้ติดตามอำเภอใด
@@ -139,7 +171,6 @@
     </section>
 
 
-    <!-- Footer -->
     <footer>
 
       <p>
@@ -156,9 +187,14 @@
   </main>
 
 
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- ⭐ สำคัญ: ต้องโหลด LIFF SDK ก่อน app.js -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <!-- JavaScript ของเรา -->
+  <script src="app.js"></script>
 
 </body>
 </html>
