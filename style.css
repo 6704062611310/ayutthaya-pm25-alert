@@ -1,3 +1,7 @@
+/* =========================================
+   GLOBAL
+========================================= */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,11 +15,17 @@ html {
 body {
   min-height: 100vh;
   font-family: "Noto Sans Thai", sans-serif;
+
+  color: #172b4d;
+
   background:
-    radial-gradient(circle at top left, rgba(34, 197, 94, 0.10), transparent 30%),
-    radial-gradient(circle at top right, rgba(14, 165, 233, 0.10), transparent 30%),
-    #f5f8f6;
-  color: #17231b;
+    linear-gradient(
+      180deg,
+      #eef6ff 0%,
+      #f7fbff 42%,
+      #ffffff 100%
+    );
+
   line-height: 1.6;
 }
 
@@ -30,34 +40,96 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
 .container {
-  width: min(100% - 32px, 900px);
+  width: min(100% - 32px, 960px);
   margin: 0 auto;
-  padding: 40px 0 60px;
+  padding: 34px 0 60px;
 }
 
 
-/* ================================
+/* =========================================
    HERO
-================================ */
+========================================= */
 
 .hero {
+  position: relative;
+
   text-align: center;
-  padding: 30px 20px 34px;
+
+  padding: 44px 28px 40px;
+  margin-bottom: 24px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b63ce 0%,
+      #147be5 50%,
+      #2394f2 100%
+    );
+
+  color: white;
+
+  box-shadow:
+    0 18px 40px rgba(15, 86, 170, 0.18);
+}
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+  top: -40px;
+  right: -40px;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+  bottom: -60px;
+  left: -50px;
+
+  width: 170px;
+  height: 170px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
 
-  padding: 8px 14px;
+  padding: 7px 14px;
+
   border-radius: 999px;
 
-  background: rgba(34, 197, 94, 0.10);
-  border: 1px solid rgba(34, 197, 94, 0.20);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 
-  color: #15803d;
+  color: white;
+
   font-size: 13px;
   font-weight: 700;
 
@@ -65,57 +137,65 @@ a {
 }
 
 .hero h1 {
-  font-size: clamp(30px, 5vw, 52px);
-  font-weight: 800;
+  font-size: clamp(30px, 5vw, 48px);
+
   line-height: 1.25;
+
+  font-weight: 800;
+
   letter-spacing: -0.5px;
+
   margin-bottom: 16px;
 }
 
 .hero h1 span {
-  color: #16a34a;
+  color: #dff1ff;
 }
 
 .hero p {
-  max-width: 680px;
+  max-width: 690px;
+
   margin: 0 auto;
-  color: #647067;
-  font-size: 16px;
+
+  color: rgba(255, 255, 255, 0.90);
+
+  font-size: 15px;
 }
 
 
-/* ================================
+/* =========================================
    CARD
-================================ */
+========================================= */
 
 .card {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid #e1e8e3;
-  border-radius: 24px;
+  background: #ffffff;
 
-  padding: 26px;
+  border: 1px solid #dce9f7;
+
+  border-radius: 22px;
+
+  padding: 28px;
+
   margin-bottom: 20px;
 
   box-shadow:
-    0 12px 35px rgba(30, 60, 40, 0.06),
-    0 2px 8px rgba(30, 60, 40, 0.03);
-
-  backdrop-filter: blur(10px);
+    0 10px 30px rgba(29, 78, 121, 0.07);
 }
 
 .check-card {
-  margin-top: 8px;
+  margin-top: 0;
 }
 
 
-/* ================================
+/* =========================================
    SECTION TITLE
-================================ */
+========================================= */
 
 .section-title {
   display: flex;
   align-items: center;
   gap: 14px;
+
   margin-bottom: 22px;
 }
 
@@ -123,39 +203,55 @@ a {
   width: 48px;
   height: 48px;
 
+  flex-shrink: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  flex-shrink: 0;
-
   border-radius: 14px;
-  background: #eefaf1;
-  font-size: 23px;
+
+  background: #eaf4ff;
+
+  border: 1px solid #d6e9fb;
+
+  color: #0b63ce;
+
+  font-size: 22px;
 }
 
 .section-title h2 {
-  font-size: 21px;
+  color: #183b63;
+
+  font-size: 20px;
+
   font-weight: 800;
-  margin-bottom: 2px;
+
+  line-height: 1.3;
+
+  margin-bottom: 3px;
 }
 
 .muted {
-  color: #78827b;
+  color: #73849a;
+
   font-size: 14px;
 }
 
 
-/* ================================
+/* =========================================
    FORM
-================================ */
+========================================= */
 
 label {
   display: block;
+
   margin-bottom: 8px;
 
-  color: #344138;
+  color: #294561;
+
   font-size: 14px;
+
   font-weight: 700;
 }
 
@@ -163,15 +259,19 @@ select,
 input {
   width: 100%;
 
-  padding: 14px 16px;
+  min-height: 50px;
 
-  border: 1px solid #dce5de;
-  border-radius: 14px;
+  padding: 13px 15px;
 
-  background: #fbfdfb;
-  color: #1d281f;
+  border: 1px solid #ccdbea;
+
+  border-radius: 12px;
 
   outline: none;
+
+  background: #fbfdff;
+
+  color: #1c3550;
 
   font-size: 15px;
 
@@ -181,38 +281,53 @@ input {
     background 0.2s ease;
 }
 
+select:hover,
+input:hover {
+  border-color: #9dbde0;
+}
+
 select:focus,
 input:focus {
-  border-color: #4ade80;
-  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.12);
   background: white;
+
+  border-color: #3b82d0;
+
+  box-shadow:
+    0 0 0 4px rgba(37, 117, 205, 0.10);
 }
 
 input[readonly] {
-  background: #f3f6f4;
-  color: #5e6a62;
+  background: #f1f5f9;
+
+  color: #64748b;
+
+  cursor: default;
 }
 
 
-/* ================================
-   BUTTONS
-================================ */
+/* =========================================
+   BUTTON
+========================================= */
 
 button {
   width: 100%;
-  border: none;
-  cursor: pointer;
 
   min-height: 50px;
 
-  border-radius: 14px;
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
 
   font-size: 15px;
+
   font-weight: 800;
 
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease,
+    background 0.15s ease,
     opacity 0.15s ease;
 }
 
@@ -226,91 +341,131 @@ button:active {
 
 button:disabled {
   cursor: not-allowed;
-  opacity: 0.65;
+
+  opacity: 0.60;
+
   transform: none;
 }
 
-.primary {
-  margin-top: 14px;
 
+/* =========================================
+   PRIMARY BUTTON
+========================================= */
+
+.primary {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
+  margin-top: 14px;
+
   padding: 0 18px;
 
-  background: linear-gradient(135deg, #16a34a, #22c55e);
+  background:
+    linear-gradient(
+      135deg,
+      #0b63ce,
+      #1684e8
+    );
+
   color: white;
 
-  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.20);
+  box-shadow:
+    0 7px 18px rgba(11, 99, 206, 0.20);
 }
+
+.primary:hover {
+  box-shadow:
+    0 9px 22px rgba(11, 99, 206, 0.27);
+}
+
+
+/* =========================================
+   SECONDARY BUTTON
+========================================= */
 
 .secondary {
   margin-top: 14px;
 
-  background: #17231b;
+  background: #164e86;
+
   color: white;
 
-  box-shadow: 0 8px 18px rgba(23, 35, 27, 0.12);
+  box-shadow:
+    0 7px 18px rgba(22, 78, 134, 0.16);
+}
+
+.secondary:hover {
+  background: #123f6d;
 }
 
 
-/* ================================
+/* =========================================
    NOTICE
-================================ */
+========================================= */
 
 .notice {
   display: flex;
-  gap: 10px;
+
   align-items: flex-start;
 
-  margin-bottom: 20px;
+  gap: 10px;
+
   padding: 14px 16px;
 
-  border-radius: 14px;
+  margin-bottom: 20px;
 
-  background: #fffbea;
-  border: 1px solid #f1e6b8;
+  border-radius: 12px;
 
-  color: #655a27;
+  background: #f1f7fd;
+
+  border: 1px solid #d7e7f5;
+
+  color: #42617c;
 
   font-size: 13px;
 }
 
 .notice span {
   font-size: 18px;
+
   line-height: 1;
+
   margin-top: 2px;
 }
 
 
-/* ================================
+/* =========================================
    LINE ADD FRIEND
-================================ */
+========================================= */
 
 .line-add-box {
   display: flex;
+
   align-items: center;
-  gap: 14px;
+
+  gap: 15px;
 
   padding: 18px;
 
   margin-bottom: 20px;
 
-  border-radius: 18px;
+  border-radius: 16px;
 
-  background: linear-gradient(
-    135deg,
-    #f0fff4,
-    #eafff0
-  );
+  background:
+    linear-gradient(
+      135deg,
+      #f3f9ff,
+      #f9fcff
+    );
 
-  border: 1px solid #c8efd4;
+  border: 1px solid #cfe2f4;
 }
 
 .line-add-icon {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
 
   flex-shrink: 0;
 
@@ -320,10 +475,13 @@ button:disabled {
 
   border-radius: 14px;
 
-  background: #06c755;
-  color: white;
+  background: #e4f1ff;
 
-  font-size: 23px;
+  color: #0b63ce;
+
+  border: 1px solid #cfe4fa;
+
+  font-size: 24px;
 }
 
 .line-add-content {
@@ -331,64 +489,81 @@ button:disabled {
 }
 
 .line-add-content h3 {
+  color: #1d446b;
+
   font-size: 16px;
+
   font-weight: 800;
-  margin-bottom: 2px;
+
+  margin-bottom: 3px;
 }
 
 .line-add-content p {
-  color: #5d6c62;
+  color: #718399;
+
   font-size: 13px;
-  margin-bottom: 10px;
+
+  margin-bottom: 11px;
 }
 
 .line-friend-btn {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
-  padding: 10px 16px;
+  padding: 9px 16px;
 
-  border-radius: 11px;
+  border-radius: 10px;
 
-  background: #06c755;
+  background: #0b63ce;
+
   color: white;
 
   text-decoration: none;
 
   font-size: 14px;
+
   font-weight: 800;
 
-  box-shadow: 0 6px 15px rgba(6, 199, 85, 0.18);
+  box-shadow:
+    0 6px 14px rgba(11, 99, 206, 0.18);
 
   transition:
     transform 0.15s ease,
-    box-shadow 0.15s ease;
+    box-shadow 0.15s ease,
+    background 0.15s ease;
 }
 
 .line-friend-btn:hover {
+  background: #0955b2;
+
   transform: translateY(-1px);
-  box-shadow: 0 8px 18px rgba(6, 199, 85, 0.24);
+
+  box-shadow:
+    0 8px 18px rgba(11, 99, 206, 0.24);
 }
 
 
-/* ================================
+/* =========================================
    RESULT
-================================ */
+========================================= */
 
 .result {
   margin-top: 20px;
 
   padding: 20px;
 
-  border-radius: 20px;
+  border-radius: 18px;
 
-  background: #f8fbf9;
-  border: 1px solid #e1e9e3;
+  background: #f8fbff;
+
+  border: 1px solid #dbe8f5;
 }
 
 .result-head {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -398,79 +573,105 @@ button:disabled {
 }
 
 .result-head h2 {
+  color: #183b63;
+
   font-size: 24px;
+
   font-weight: 800;
 }
 
 .pill {
-  padding: 7px 12px;
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 34px;
+
+  padding: 6px 12px;
 
   border-radius: 999px;
 
-  background: #e8f8ed;
-  color: #15803d;
+  background: #e8f3ff;
 
-  font-size: 13px;
+  border: 1px solid #cfe3f8;
+
+  color: #0b63ce;
+
+  font-size: 12px;
+
   font-weight: 800;
 
   white-space: nowrap;
 }
 
 
-/* ================================
+/* =========================================
    PM BOX
-================================ */
+========================================= */
 
 .pm-box {
   padding: 22px;
+
+  margin-bottom: 16px;
 
   border-radius: 18px;
 
   background:
     linear-gradient(
       135deg,
-      #f0fff4,
-      #f8fffa
+      #edf6ff,
+      #f7fbff
     );
 
-  border: 1px solid #d8eedf;
-
-  margin-bottom: 16px;
+  border: 1px solid #d8e8f7;
 }
 
 .pm-label {
-  color: #66736a;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 4px;
+  color: #6d8095;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  margin-bottom: 7px;
 }
 
 .pm-value {
   display: flex;
+
   align-items: baseline;
+
   gap: 8px;
 
+  color: #123f6d;
+
   font-size: 46px;
+
   line-height: 1;
 
   font-weight: 800;
-  color: #17231b;
 }
 
 .pm-value small {
-  font-size: 14px;
+  color: #708298;
+
+  font-size: 13px;
+
   font-weight: 600;
-  color: #6e796f;
 }
 
 
-/* ================================
+/* =========================================
    MINI CARDS
-================================ */
+========================================= */
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
   gap: 12px;
 }
 
@@ -479,102 +680,124 @@ button:disabled {
 
   padding: 16px;
 
-  border-radius: 16px;
+  border-radius: 15px;
 
   background: white;
-  border: 1px solid #e2e9e4;
+
+  border: 1px solid #dfe9f3;
+
+  box-shadow:
+    0 4px 12px rgba(30, 68, 105, 0.04);
 }
 
 .mini-card span {
   display: block;
 
-  color: #748077;
+  color: #7890a5;
+
   font-size: 12px;
-  margin-bottom: 5px;
+
+  margin-bottom: 6px;
 }
 
 .mini-card strong {
   display: block;
 
-  color: #243027;
+  color: #254562;
+
   font-size: 14px;
-  line-height: 1.55;
+
+  line-height: 1.6;
 }
 
 
-/* ================================
+/* =========================================
    SOURCE
-================================ */
+========================================= */
 
 .source {
   margin-top: 15px;
 
-  color: #7c887f;
+  color: #8191a3;
+
   font-size: 12px;
 }
 
 
-/* ================================
-   STATUS / ERROR
-================================ */
+/* =========================================
+   STATUS
+========================================= */
 
 .status {
   margin-top: 12px;
 
-  padding: 13px 14px;
+  padding: 12px 14px;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
-  background: #eefbf2;
-  border: 1px solid #cfead7;
+  background: #edf7ff;
 
-  color: #166534;
+  border: 1px solid #d1e6f7;
+
+  color: #165b91;
 
   font-size: 13px;
+
   font-weight: 700;
 }
+
+
+/* =========================================
+   ERROR
+========================================= */
 
 .error {
   margin-top: 15px;
 
-  padding: 13px 14px;
+  padding: 12px 14px;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
-  background: #fff1f1;
-  border: 1px solid #f4cccc;
+  background: #fff5f5;
+
+  border: 1px solid #f1cccc;
 
   color: #b42318;
 
   font-size: 13px;
+
   font-weight: 700;
 }
 
 
-/* ================================
+/* =========================================
    SUBSCRIPTIONS
-================================ */
+========================================= */
 
 .empty {
-  min-height: 110px;
+  min-height: 115px;
 
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
-  text-align: center;
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
 
   gap: 8px;
 
   padding: 20px;
 
-  border-radius: 18px;
+  text-align: center;
 
-  background: #fafcfb;
-  border: 1px dashed #d8e1da;
+  border-radius: 16px;
 
-  color: #78837b;
+  background: #fbfdff;
+
+  border: 1px dashed #ccdbe9;
+
+  color: #7890a5;
 
   font-size: 14px;
 }
@@ -587,8 +810,10 @@ button:disabled {
   width: 100%;
 
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
+
+  justify-content: space-between;
 
   gap: 12px;
 
@@ -596,13 +821,18 @@ button:disabled {
 
   margin-bottom: 8px;
 
-  border-radius: 14px;
+  border-radius: 12px;
 
   background: white;
-  border: 1px solid #e1e9e3;
 
-  color: #29342d;
+  border: 1px solid #dce7f1;
+
+  color: #294561;
+
   font-size: 14px;
+
+  box-shadow:
+    0 3px 10px rgba(40, 78, 112, 0.03);
 }
 
 .sub-item:last-child {
@@ -610,21 +840,22 @@ button:disabled {
 }
 
 .sub-item strong {
-  color: #16a34a;
+  color: #0b63ce;
+
   font-size: 12px;
 }
 
 
-/* ================================
+/* =========================================
    FOOTER
-================================ */
+========================================= */
 
 footer {
+  padding: 22px 10px 0;
+
   text-align: center;
 
-  padding: 15px 10px 0;
-
-  color: #7c877f;
+  color: #8090a0;
 
   font-size: 12px;
 }
@@ -632,7 +863,7 @@ footer {
 .footer-logo {
   margin-bottom: 8px;
 
-  color: #2f3d34;
+  color: #315372;
 
   font-size: 15px;
 }
@@ -642,32 +873,35 @@ footer p {
 }
 
 
-/* ================================
+/* =========================================
    HIDDEN
-================================ */
+========================================= */
 
 .hidden {
   display: none !important;
 }
 
 
-/* ================================
+/* =========================================
    RESPONSIVE
-================================ */
+========================================= */
 
 @media (max-width: 700px) {
 
   .container {
-    width: min(100% - 20px, 900px);
-    padding-top: 20px;
+    width: min(100% - 18px, 960px);
+
+    padding-top: 16px;
   }
 
   .hero {
-    padding: 20px 8px 25px;
+    padding: 32px 20px 30px;
+
+    border-radius: 22px;
   }
 
   .hero h1 {
-    font-size: 30px;
+    font-size: 29px;
   }
 
   .hero p {
@@ -676,7 +910,8 @@ footer p {
 
   .card {
     padding: 20px;
-    border-radius: 20px;
+
+    border-radius: 18px;
   }
 
   .section-title {
@@ -691,12 +926,17 @@ footer p {
     align-items: flex-start;
   }
 
+  .line-add-content {
+    min-width: 0;
+  }
+
   .line-friend-btn {
     width: 100%;
   }
 
   .result-head {
     align-items: flex-start;
+
     flex-direction: column;
   }
 
@@ -706,6 +946,7 @@ footer p {
 
   .sub-item {
     align-items: flex-start;
+
     flex-direction: column;
   }
 }
