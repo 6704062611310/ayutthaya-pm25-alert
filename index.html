@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ระบบแจ้งเตือนค่าฝุ่น PM2.5 รายอำเภอ</title>
+  <title>Ayutthaya PM2.5 Alert</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,34 +21,61 @@
 
   <main class="container">
 
+    <!-- HERO -->
     <section class="hero">
+
       <div class="badge">
-        PM2.5 • พระนครศรีอยุธยา
+        ● LIVE · PM2.5 · พระนครศรีอยุธยา
       </div>
 
       <h1>
-        ระบบแจ้งเตือนค่าฝุ่น PM2.5 รายอำเภอ
+        ตรวจสอบคุณภาพอากาศ<br>
+        <span>จังหวัดพระนครศรีอยุธยา</span>
       </h1>
 
       <p>
-        เลือกอำเภอเพื่อตรวจสอบค่าฝุ่นล่าสุด
-        ระดับความเสี่ยง และสมัครติดตามการแจ้งเตือนผ่าน LINE
+        ตรวจสอบค่าฝุ่น PM2.5 ล่าสุดรายอำเภอ
+        พร้อมระดับความเสี่ยงและคำแนะนำในการดูแลสุขภาพ
       </p>
+
     </section>
 
 
-    <section class="card">
+    <!-- CHECK PM2.5 -->
+    <section class="card check-card">
+
+      <div class="section-title">
+
+        <div class="icon">
+          🌫️
+        </div>
+
+        <div>
+          <h2>
+            ตรวจสอบค่าฝุ่น
+          </h2>
+
+          <p class="muted">
+            เลือกอำเภอที่ต้องการตรวจสอบ
+          </p>
+        </div>
+
+      </div>
+
 
       <label for="district">
-        เลือกอำเภอ
+        อำเภอ
       </label>
 
       <select id="district"></select>
 
       <button id="checkBtn" class="primary">
-        ตรวจสอบ PM2.5
+        <span>ตรวจสอบ PM2.5</span>
+        <span>→</span>
       </button>
 
+
+      <!-- RESULT -->
 
       <div id="result" class="result hidden">
 
@@ -56,7 +83,7 @@
 
           <div>
             <div class="muted">
-              อำเภอ
+              คุณภาพอากาศของ
             </div>
 
             <h2 id="districtName">
@@ -71,15 +98,23 @@
         </div>
 
 
-        <div class="pm-value">
+        <div class="pm-box">
 
-          <span id="pm25">
-            --
-          </span>
+          <div class="pm-label">
+            PM2.5
+          </div>
 
-          <small>
-            µg/m³
-          </small>
+          <div class="pm-value">
+
+            <span id="pm25">
+              --
+            </span>
+
+            <small>
+              µg/m³
+            </small>
+
+          </div>
 
         </div>
 
@@ -126,15 +161,36 @@
     </section>
 
 
+    <!-- LINE FOLLOW -->
     <section class="card">
 
-      <h2>
-        ติดตามอำเภอนี้
-      </h2>
+      <div class="section-title">
 
-      <p class="muted">
-        กรอก LINE User ID เพื่อให้ระบบสามารถส่งแจ้งเตือนเมื่อค่าฝุ่นถึงเกณฑ์
-      </p>
+        <div class="icon">
+          🔔
+        </div>
+
+        <div>
+          <h2>
+            รับการแจ้งเตือนผ่าน LINE
+          </h2>
+
+          <p class="muted">
+            รับการแจ้งเตือนเมื่อค่าฝุ่นเข้าสู่ระดับที่กำหนด
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="notice">
+        <span>💡</span>
+
+        <p>
+          ระบบจะส่งแจ้งเตือนเฉพาะเมื่อค่าฝุ่นถึงเกณฑ์ที่กำหนด
+          เพื่อไม่ให้เกิดการแจ้งเตือนบ่อยเกินไป
+        </p>
+      </div>
 
 
       <label for="lineUserId">
@@ -144,12 +200,12 @@
       <input
         id="lineUserId"
         type="text"
-        placeholder="เช่น Uxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        placeholder="Uxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
       >
 
 
       <button id="followBtn" class="secondary">
-        ติดตามอำเภอนี้
+        🔔 ติดตามอำเภอนี้
       </button>
 
 
@@ -158,20 +214,50 @@
     </section>
 
 
+    <!-- SUBSCRIPTIONS -->
     <section class="card">
 
-      <h2>
-        สถานะการติดตาม
-      </h2>
+      <div class="section-title">
+
+        <div class="icon">
+          📍
+        </div>
+
+        <div>
+          <h2>
+            อำเภอที่ติดตาม
+          </h2>
+
+          <p class="muted">
+            รายการอำเภอที่คุณเปิดรับการแจ้งเตือน
+          </p>
+        </div>
+
+      </div>
+
 
       <div id="subscriptionList" class="empty">
-        ยังไม่ได้ติดตามอำเภอใด
+
+        <div class="empty-icon">
+          📭
+        </div>
+
+        <span>
+          ยังไม่ได้ติดตามอำเภอใด
+        </span>
+
       </div>
 
     </section>
 
 
+    <!-- FOOTER -->
     <footer>
+
+      <div class="footer-logo">
+        🌿
+        <strong>Ayutthaya PM2.5 Alert</strong>
+      </div>
 
       <p>
         ข้อมูล PM2.5 จาก World Air Quality Index Project (WAQI)
@@ -190,10 +276,10 @@
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- ⭐ สำคัญ: ต้องโหลด LIFF SDK ก่อน app.js -->
+  <!-- LIFF -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
-  <!-- JavaScript ของเรา -->
+  <!-- JavaScript -->
   <script src="app.js"></script>
 
 </body>
