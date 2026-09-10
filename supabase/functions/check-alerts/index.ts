@@ -169,9 +169,7 @@ Deno.serve(async (req) => {
       // ส่ง LINE เฉพาะตอนที่เกินเกณฑ์ PM2.5
       // และไม่ส่งซ้ำถ้ายังอยู่ระดับเดิม
       // ==================================================
-      const shouldAlert =
-        level.alert === true &&
-        level.code !== previous;
+      const shouldAlert = true;
 
       // =========================
       // กรณีต้องแจ้งเตือน
