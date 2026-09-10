@@ -1,0 +1,18 @@
+name: PM2.5 Alert
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Supabase alert function
+        run: |
+          curl --fail-with-body -X POST \
+            "${{ secrets.SUPABASE_ALERT_FUNCTION_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.ALERT_CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -d '{}' 

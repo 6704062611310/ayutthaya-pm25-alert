@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบแจ้งเตือนค่าฝุ่น PM2.5 รายอำเภอ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <div class="badge">PM2.5 • พระนครศรีอยุธยา</div>
+      <h1>ระบบแจ้งเตือนค่าฝุ่น PM2.5 รายอำเภอ</h1>
+      <p>เลือกอำเภอเพื่อตรวจสอบค่าฝุ่นล่าสุด ระดับความเสี่ยง และสมัครติดตามการแจ้งเตือนผ่าน LINE</p>
+    </section>
+
+    <section class="card">
+      <label for="district">เลือกอำเภอ</label>
+      <select id="district"></select>
+
+      <button id="checkBtn" class="primary">ตรวจสอบ PM2.5</button>
+
+      <div id="result" class="result hidden">
+        <div class="result-head">
+          <div>
+            <div class="muted">อำเภอ</div>
+            <h2 id="districtName">-</h2>
+          </div>
+          <div id="levelPill" class="pill">-</div>
+        </div>
+
+        <div class="pm-value">
+          <span id="pm25">--</span>
+          <small>µg/m³</small>
+        </div>
+
+        <div class="grid">
+          <div class="mini-card">
+            <span>ระดับความเสี่ยง</span>
+            <strong id="risk">-</strong>
+          </div>
+          <div class="mini-card">
+            <span>คำแนะนำ</span>
+            <strong id="advice">-</strong>
+          </div>
+        </div>
+
+        <p class="source" id="source">แหล่งข้อมูล: -</p>
+      </div>
+
+      <div id="error" class="error hidden"></div>
+    </section>
+
+    <section class="card">
+      <h2>ติดตามอำเภอนี้</h2>
+      <p class="muted">กรอก LINE User ID เพื่อให้ระบบสามารถส่งแจ้งเตือนเมื่อค่าฝุ่นถึงเกณฑ์</p>
+
+      <label for="lineUserId">LINE User ID</label>
+      <input id="lineUserId" type="text" placeholder="เช่น Uxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+
+      <button id="followBtn" class="secondary">ติดตามอำเภอนี้</button>
+
+      <div id="followStatus" class="status hidden"></div>
+    </section>
+
+    <section class="card">
+      <h2>สถานะการติดตาม</h2>
+      <div id="subscriptionList" class="empty">ยังไม่ได้ติดตามอำเภอใด</div>
+    </section>
+
+    <footer>
+      <p>ข้อมูล PM2.5 จาก World Air Quality Index Project (WAQI)</p>
+      <p>ใช้สำหรับการแจ้งเตือนและการติดตามสถานการณ์เบื้องต้น ไม่ใช่คำแนะนำทางการแพทย์</p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>

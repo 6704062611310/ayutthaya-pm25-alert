@@ -1,0 +1,5 @@
+[functions.pm25]
+verify_jwt = false
+
+[functions.check-alerts]
+verify_jwt = false
